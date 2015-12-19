@@ -4,14 +4,37 @@
         <tr>
             <th>Wikipedia</th>
         <tr>
-    {% for element in wikiPages %}
-        <tr>
-            <td>
-                <a class="list-group-item" href="https://en.wikipedia.org/wiki/{{ element|iriencode }}" target="_blank">
-                {{ element }}
-                </a>
-            <td>
-        </tr>
-    {% endfor %}
+        {% for element in wikiPages %}
+            <tr>
+                <td>
+                    <a class="list-group-item" href="https://en.wikipedia.org/wiki/{{ element|iriencode }}" target="_blank">
+                    {{ element }}
+                    </a>
+                <td>
+            </tr>
+        {% endfor %}
     </table>
+    <nav>
+        <ul class="pagination">
+            <li>
+                {% if wikiPages.has_previous %}
+                    <a href="?search={{ search }}&type=w&wiki_page={{ wikiPages.previous_page_number }}">page {{wikiPages.previous_page_number}}</a>
+                {% else %}
+                    <span>None</span>
+                {% endif %}
+            </li>
+
+            <li>
+                <span class="current">
+                    Page {{ wikiPages.number }} of {{ wikiPages.paginator.num_pages }}
+                </span>
+            </li>
+            
+            <li>
+            {% if wikiPages.has_next %}
+                <a href="?search={{ search }}&type=w&wiki_page={{ wikiPages.next_page_number }}">page {{wikiPages.next_page_number}}</a>
+            {% endif %}
+            </li>
+        </ul>
+    </nav>
 </div>

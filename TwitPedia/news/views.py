@@ -8,6 +8,11 @@ class IndexView(FormView):
     def get(self, request, *args, **kwargs):
         response = {}
         search = request.GET.get("search")
-        print "WikiPages will be based off " + str(search) + "    *******************************************"
-        response['wikiPages']= wikiPage(1, search)
+        response['search'] = search
+        T = request.GET.get("type")
+        if (T == "w"):
+            pageNum = request.GET.get("wiki_page")
+            response["wikiPages"] = wikiPage(pageNum, search)
+        else:
+            response['wikiPages'] = wikiPage(1, search)
         return self.render_to_response(self.get_context_data(**response))
