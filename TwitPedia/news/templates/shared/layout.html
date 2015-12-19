@@ -1,0 +1,14 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html>
+    <head>
+        <title>{% block title %}The Twitter Wikipedia news{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'common/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'common/css/bootstrap-theme.min.css' %}">
+    </head>
+    <body>
+        <script src="{{STATIC_URL}}/js/jquery.js"></script>
+        {% block content %}{% endblock %}
+    </body>
+</html>
