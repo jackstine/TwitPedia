@@ -1,7 +1,7 @@
-from django.conf.urls import url
+from django.conf.urls import url, patterns
 
 from .views import IndexView
 
-urlpatterns = [
-    url(r'^$', IndexView.as_view() , name = 'index'),
-]
+urlpatterns = patterns('',
+    url(r'^search/$', IndexView.as_view() , name = 'search'),
+)

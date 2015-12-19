@@ -1,0 +1,13 @@
+{% extends 'shared/layout.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <form action="{% url 'news:search' %}" method="get">
+            <input name="search" placeholder="Enter your Search Here!"/>
+            <button type="submit" class="btn btn-default"></button>
+        </form>
+    </div>
+    {% include 'news/newsFeed.html' %}
+</div>
+{% endblock %}
