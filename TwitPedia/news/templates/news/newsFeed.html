@@ -1,1 +1,17 @@
 <h3>Hello this is the news Feed</h3>
+<div class='list-group'>
+    <table>
+        <tr>
+            <th>Wikipedia</th>
+        <tr>
+    {% for element in wikiPages %}
+        <tr>
+            <td>
+                <a class="list-group-item" href="https://en.wikipedia.org/wiki/{{ element|iriencode }}" target="_blank">
+                {{ element }}
+                </a>
+            <td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
