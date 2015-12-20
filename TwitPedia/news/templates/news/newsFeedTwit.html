@@ -1,0 +1,35 @@
+<div class='list-group'>
+    <table>
+        <tr>
+            <th>Twitter</th>
+        <tr>
+        {% for element in tweetPages %}
+            <tr>
+                <td>
+                    {{ element }}
+                <td>
+            </tr>
+        {% endfor %}
+    </table>
+    <nav>
+        <ul class="pagination">
+            <li>
+                {% if tweetPages.has_previous %}
+                    <a href="?search={{ search }}&type=t&twit_page={{ tweetPages.previous_page_number }}">page {{tweetPages.previous_page_number}}</a>
+                {% else %}
+                    <span>None</span>
+                {% endif %}
+            </li>
+            <li>
+                <span class="current">
+                    Page {{ tweetPages.number }} of {{ tweetPages.paginator.num_pages }}
+                </span>
+            </li>
+            <li>
+            {% if tweetPages.has_next %}
+                <a href="?search={{ search }}&type=w&tweet_page={{ tweetPages.next_page_number }}">page {{tweetPages.next_page_number}}</a>
+            {% endif %}
+            </li>
+        </ul>
+    </nav>
+</div>

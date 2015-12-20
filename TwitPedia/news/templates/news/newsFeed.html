@@ -1,4 +1,3 @@
-<h3>Hello this is the news Feed</h3>
 <div class='list-group'>
     <table>
         <tr>
@@ -23,13 +22,11 @@
                     <span>None</span>
                 {% endif %}
             </li>
-
             <li>
                 <span class="current">
                     Page {{ wikiPages.number }} of {{ wikiPages.paginator.num_pages }}
                 </span>
             </li>
-            
             <li>
             {% if wikiPages.has_next %}
                 <a href="?search={{ search }}&type=w&wiki_page={{ wikiPages.next_page_number }}">page {{wikiPages.next_page_number}}</a>

@@ -5,7 +5,7 @@ def getPages(page, objs, numOnPage = 10):
     try:
         objs = paginator.page(page)
     except PageNotAnInteger:
-        objs = pageinator.page(1)
+        objs = paginator.page(1)
     except EmptyPage:
         objs = paginator.page(paginator.num_pages)
     return objs
