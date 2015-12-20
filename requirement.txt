@@ -1,0 +1,4 @@
+security        pip install requests[security]
+jqueryDjango    pip install django-jquery
+wikipedia       pip install wikipedia
+tweepy          pip install tweepy
