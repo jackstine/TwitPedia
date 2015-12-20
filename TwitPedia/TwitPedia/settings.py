@@ -22,6 +22,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '(ppkyhu7piqto#_ytac_g$^no34k!uf0%#pv9&(rx5c-0-fpd%'
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
+    }
+}
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -39,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'jquery',
     'news',
+    'common',
 )
 
 MIDDLEWARE_CLASSES = (

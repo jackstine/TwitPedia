@@ -1,3 +1,4 @@
+{% block content %}
 <div class='list-group'>
     <table>
         <tr>
@@ -6,7 +7,7 @@
         {% for element in tweetPages %}
             <tr>
                 <td>
-                    {{ element }}
+                    {% include 'shared/tweet.html' with tweet=element only %}
                 <td>
             </tr>
         {% endfor %}
@@ -27,9 +28,10 @@
             </li>
             <li>
             {% if tweetPages.has_next %}
-                <a href="?search={{ search }}&type=w&tweet_page={{ tweetPages.next_page_number }}">page {{tweetPages.next_page_number}}</a>
+                <a href="?search={{ search }}&type=t&twit_page={{ tweetPages.next_page_number }}">page {{tweetPages.next_page_number}}</a>
             {% endif %}
             </li>
         </ul>
     </nav>
 </div>
+{% endblock %}
