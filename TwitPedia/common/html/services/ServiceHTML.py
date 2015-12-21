@@ -5,17 +5,17 @@ from django.template.loader import render_to_string
 def createWikiList(page, query, numToSearch = 100, numToPage = 10):
     wikiPages = wikiPage(page, query, numToSearch, numToPage)
     htmlRows = [render_to_string('shared/wiki.html', { 'wiki':sec}) for sec in wikiPages]
-    return HTMLList("Wikipedia", htmlRows)
+    return HTMLList("Wikipedia", htmlRows, wikiPages.paginator.num_pages)
 
 def createTwitterList(page, search, numToPage = 10):
     twitterPages = twitterSearchPage(page, search, numToPage)
     htmlRows = [render_to_string('shared/tweet.html', { 'tweet':sec}) for sec in twitterPages]
-    return HTMLList("Twitter", htmlRows)
+    return HTMLList("Twitter", htmlRows, twitterPages.paginator.num_pages)
 
-def createTwitPediaTable(twitterPage, wikiPage, search, numToSearch = 100,numToPage = 10): #TODO encapsulate in common DS
-    wikiList = createWikiList(wikiPage, search, numToSearch, numToPage)
-    twitterList = createTwitterList(twitterPage, search, numToPage)
-    table = HTMLTable(numToPage)
+def createTwitPediaTable(page, search, numToSearch = 100,numToPage = 10): #TODO encapsulate in common DS
+    wikiList = createWikiList(page, search, numToSearch, numToPage)
+    twitterList = createTwitterList(page, search, numToPage)
+    table = HTMLTable(numToPage,search, page)
     table.add(wikiList)
     table.add(twitterList) 
     return table

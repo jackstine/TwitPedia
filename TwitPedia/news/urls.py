@@ -3,6 +3,5 @@ from django.conf.urls import url, patterns
 from .views import IndexView
 
 urlpatterns = patterns('',
-    url(r'^', IndexView.as_view(), name = 'index'),
-    url(r'^search/$', IndexView.as_view() , name = 'search'),
+    url(r'^search/', IndexView.as_view(), name = 'search'),
 )

@@ -1,11 +1,11 @@
 <div class='list-group'>
     <table>
         <tr>
-            {% for header in headers %}
+            {% for header in tablePage.headers %}
                 <th class="span2">{{ header }}</th>
             {% endfor %}
         </tr>
-            {% for row in rows %}
+            {% for row in tablePage.rows %}
                 <tr>
                     {% for col in row %}
                         <td class="span2">{{ col }}</td>
@@ -16,20 +16,20 @@
     <nav>
         <ul class="pagination">
             <li>
-                {% if wikiPages.has_previous %}
-                    <a href="?search={{ search }}&type=w&wiki_page={{ wikiPages.previous_page_number }}">page {{wikiPages.previous_page_number}}</a>
+                {% if tablePage.hasPrevious %}
+                    <a href="?tablePageSearch={{ tablePage.search }}&tablePageNum={{ tablePage.previousPage }}">page {{tablePage.previousPage}}</a>
                 {% else %}
                     <span>None</span>
                 {% endif %}
             </li>
             <li>
                 <span class="current">
-                    Page {{ wikiPages.number }} of {{ wikiPages.paginator.num_pages }}
+                    Page {{ tablePage.currentPage }} of {{ tablePage.maxPage }}
                 </span>
             </li>
             <li>
-            {% if wikiPages.has_next %}
-                <a href="?search={{ search }}&type=w&wiki_page={{ wikiPages.next_page_number }}">page {{wikiPages.next_page_number}}</a>
+            {% if tablePage.hasNext %}
+                <a href="?tablePageSearch={{ tablePage.search }}&tablePageNum={{ tablePage.nextPage}}">page {{tablePage.nextPage}}</a>
             {% endif %}
             </li>
         </ul>
