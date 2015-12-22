@@ -4,7 +4,7 @@ from ..Pager import getPages
 
 _twit = None
 
-def wikiPage(page, query, numToSearch = 100, numToPage = 10):
+def wikiPage(page, query, numToSearch = 50, numToPage = 10):
     wikis = wikiSearch(query, numToSearch)
     return getPages(page, wikis, numToPage)
 
