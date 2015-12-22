@@ -3,14 +3,20 @@ from ...html.base import HTMLList, HTMLTable
 from django.template.loader import render_to_string
 
 def createWikiList(page, query, numToSearch = 50, numToPage = 10):
-    wikiPages = wikiPage(page, query, numToSearch, numToPage)
-    htmlRows = [render_to_string('shared/wiki.html', { 'wiki':sec}) for sec in wikiPages]
-    return HTMLList("Wikipedia", htmlRows, wikiPages.paginator.num_pages)
+    try:
+        wikiPages = wikiPage(page, query, numToSearch, numToPage)
+        htmlRows = [render_to_string('shared/wiki.html', { 'wiki':sec}) for sec in wikiPages]
+        return HTMLList("Wikipedia", htmlRows, wikiPages.paginator.num_pages)
+    except:
+        return HTMLList("Wikipedia",list(),0)
 
 def createTwitterList(page, search, numToPage = 10):
-    twitterPages = twitterSearchPage(page, search, numToPage)
-    htmlRows = [render_to_string('shared/tweet.html', { 'tweet':sec}) for sec in twitterPages]
-    return HTMLList("Twitter", htmlRows, twitterPages.paginator.num_pages)
+    try:
+        twitterPages = twitterSearchPage(page, search, numToPage)
+        htmlRows = [render_to_string('shared/tweet.html', { 'tweet':sec}) for sec in twitterPages]
+        return HTMLList("Twitter", htmlRows, twitterPages.paginator.num_pages)
+    except:
+        return HTMLList("Twitter",list(),0)
 
 def createTwitPediaTable(page, search, numToSearch = 50,numToPage = 10): #TODO encapsulate in common DS
     wikiList = createWikiList(page, search, numToSearch, numToPage)
