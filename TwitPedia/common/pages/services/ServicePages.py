@@ -8,10 +8,13 @@ def wikiPage(page, query, numToSearch = 50, numToPage = 10):
     wikis = wikiSearch(query, numToSearch)
     return getPages(page, wikis, numToPage)
 
-def twitterSearchPage(page, search, numToPage = 10):
+def twitterSearchPage(page, search, numToPage = 10, geocode = None):
     global _twit
     setTwitter()
-    tweets = _twit.twitterSearch(search)
+    if (geocode == None):
+        tweets = _twit.twitterSearch(search)
+    else:
+        tweets = _twit.twitterGeoSearch(search,geocode)
     return getPages(page, tweets, numToPage)
 
 

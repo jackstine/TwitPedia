@@ -1,15 +1,20 @@
 {% extends 'shared/layout.html' %}
-
+{% load static %}
 {% block content %}
+
 <div class="container">
     <div class="row">
         <form action="{% url 'news:search' %}" method="get">
             <input name="search" placeholder="Enter your Search Here!"/>
             <button type="submit" class="btn btn-default">Submit your will</button>
+            <input type="checkbox" id="geoCheck" name="geo">If you want Tweets within 150 miles of your location</input>
+            <input type="hidden" id="latValue" name="lat" />
+            <input type="hidden" id="longValue" name="long" />
         </form>
     </div>
     {% if show %}
         {% include 'shared/templates/pageTable.html' %}
     {% endif %}
 </div>
+<script src="{% static 'common/js/geoLocation.js' %}"></script>
 {% endblock %}

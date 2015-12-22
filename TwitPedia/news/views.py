@@ -11,7 +11,7 @@ class IndexView(FormView):
         if (search == None):
             return self.tablePage(request.GET)
         else:
-            return self.createTable(search, 1)
+            return self.createTable(search, 1, request)
 
     def tablePage(self, request):
         tablePage = request.get("tablePageNum")
@@ -19,13 +19,27 @@ class IndexView(FormView):
         if (tablePage == None):
             return self.action()
         else:
-            return self.createTable(search, tablePage)
+            return self.createTable(search, tablePage, request)
 
-    def createTable(self, search, pageNum):
+    def createTable(self, search, pageNum, request):
         response = dict()
         response["show"] = True
-        response["tablePage"] = createTwitPediaTable(pageNum,search)
+        geo = request.GET.get("geo")
+        if (geo != None):
+            return self.createTableGeo(search, pageNum, request, response)
+        else:
+            response["tablePage"] = createTwitPediaTable(pageNum,search)
+            return self.action(response)
+
+
+    def createTableGeo(self, search, pageNum, request, response):
+        lat = request.GET.get("lat")
+        lon = request.GET.get("long")
+        geocode = str(lat) + "," + str(lon) + ",150mi"
+        print geocode + "********THIS IS THE GEOCODE ****************"
+        response["tablePage"] = createTwitPediaTable(pageNum,search, geocode = geocode)
         return self.action(response)
+        
 
     def action(self, response = {}):
         return self.render_to_response(self.get_context_data(**response))

@@ -22,6 +22,10 @@ class Twit:
         self.setAuth()
         return self.api.search(search)
 
+    def twitterGeoSearch(self, search, geocode):
+        self.setAuth()
+        return self.api.search(search, geocode = geocode)
+
 if (__name__ == "__main__"):
     t = Twit()
     tweets = t.twitterSearch("Jacob Cukjati")

@@ -10,17 +10,18 @@ def createWikiList(page, query, numToSearch = 50, numToPage = 10):
     except:
         return HTMLList("Wikipedia",list(),0)
 
-def createTwitterList(page, search, numToPage = 10):
+def createTwitterList(page, search, numToPage = 10, geocode = None):
     try:
-        twitterPages = twitterSearchPage(page, search, numToPage)
+        twitterPages = twitterSearchPage(page, search, numToPage, geocode)
         htmlRows = [render_to_string('shared/tweet.html', { 'tweet':sec}) for sec in twitterPages]
         return HTMLList("Twitter", htmlRows, twitterPages.paginator.num_pages)
-    except:
+    except Exception as e:
+        print e
         return HTMLList("Twitter",list(),0)
 
-def createTwitPediaTable(page, search, numToSearch = 50,numToPage = 10): #TODO encapsulate in common DS
+def createTwitPediaTable(page, search, numToSearch = 50,numToPage = 10,geocode = None): #TODO encapsulate in common DS
     wikiList = createWikiList(page, search, numToSearch, numToPage)
-    twitterList = createTwitterList(page, search, numToPage)
+    twitterList = createTwitterList(page, search, numToPage, geocode)
     table = HTMLTable(numToPage,search, page)
     table.add(wikiList)
     table.add(twitterList) 
