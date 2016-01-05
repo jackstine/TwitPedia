@@ -5,6 +5,7 @@ from common.html.services.ServiceHTML import createTwitPediaTable
 
 class IndexView(FormView):
     template_name = 'news/searchForm.html'
+    form_class = dict
 
     def get(self, request):
         get = request.GET
@@ -42,4 +43,5 @@ class IndexView(FormView):
         
 
     def action(self, response = {}):
-        return self.render_to_response(self.get_context_data(**response))
+        context = self.get_context_data(**response)
+        return self.render_to_response(context)
