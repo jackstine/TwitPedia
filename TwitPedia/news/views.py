@@ -7,11 +7,12 @@ class IndexView(FormView):
     template_name = 'news/searchForm.html'
 
     def get(self, request):
-        search = request.GET.get("search")
+        get = request.GET
+        search = get.get("search")
         if (search == None):
-            return self.tablePage(request.GET)
+            return self.tablePage(get)
         else:
-            return self.createTable(search, 1, request)
+            return self.createTable(search, 1, get)
 
     def tablePage(self, request):
         tablePage = request.get("tablePageNum")
@@ -24,7 +25,7 @@ class IndexView(FormView):
     def createTable(self, search, pageNum, request):
         response = dict()
         response["show"] = True
-        geo = request.GET.get("geo")
+        geo = request.get("geo")
         if (geo != None):
             return self.createTableGeo(search, pageNum, request, response)
         else:
@@ -33,10 +34,9 @@ class IndexView(FormView):
 
 
     def createTableGeo(self, search, pageNum, request, response):
-        lat = request.GET.get("lat")
-        lon = request.GET.get("long")
+        lat = request.get("lat")
+        lon = request.get("long")
         geocode = str(lat) + "," + str(lon) + ",150mi"
-        print geocode + "********THIS IS THE GEOCODE ****************"
         response["tablePage"] = createTwitPediaTable(pageNum,search, geocode = geocode)
         return self.action(response)
         
